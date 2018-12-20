@@ -20,7 +20,7 @@ phases:
     commands:
       - echo Entered the build phase...
       - echo Build started on `date`
-      - npm test
+      - eval $TEST_CMD
     finally:
       - echo This always runs even if the install command fails
   post_build:
