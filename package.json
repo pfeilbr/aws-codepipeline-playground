@@ -1,0 +1,26 @@
+{
+  "name": "aws-codepipeline-playground",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pfeilbr/aws-codepipeline-playground.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pfeilbr/aws-codepipeline-playground/issues"
+  },
+  "homepage": "https://github.com/pfeilbr/aws-codepipeline-playground#readme",
+  "devDependencies": {
+    "jest": "^23.6.0"
+  },
+  "dependencies": {
+    "request": "^2.88.0"
+  }
+}
