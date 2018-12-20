@@ -1,0 +1,116 @@
+{
+  "pipeline": {
+    "name": "pipeline-01",
+    "roleArn": "arn:aws:iam::529276214230:role/service-role/AWSCodePipelineServiceRole-us-east-1-pipeline-01",
+    "artifactStore": {
+      "type": "S3",
+      "location": "codepipeline-us-east-1-719001365175"
+    },
+    "stages": [
+      {
+        "name": "Source",
+        "actions": [
+          {
+            "name": "Source",
+            "actionTypeId": {
+              "category": "Source",
+              "owner": "ThirdParty",
+              "provider": "GitHub",
+              "version": "1"
+            },
+            "runOrder": 1,
+            "configuration": {
+              "Branch": "master",
+              "OAuthToken": "****",
+              "Owner": "pfeilbr",
+              "PollForSourceChanges": "false",
+              "Repo": "aws-codepipeline-playground"
+            },
+            "outputArtifacts": [
+              {
+                "name": "SourceArtifact"
+              }
+            ],
+            "inputArtifacts": []
+          }
+        ]
+      },
+      {
+        "name": "Build",
+        "actions": [
+          {
+            "name": "Build",
+            "actionTypeId": {
+              "category": "Build",
+              "owner": "AWS",
+              "provider": "CodeBuild",
+              "version": "1"
+            },
+            "runOrder": 1,
+            "configuration": {
+              "ProjectName": "codebuild-01"
+            },
+            "outputArtifacts": [
+              {
+                "name": "BuildArtifact"
+              }
+            ],
+            "inputArtifacts": [
+              {
+                "name": "SourceArtifact"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Approve",
+        "actions": [
+          {
+            "name": "Approve",
+            "actionTypeId": {
+              "category": "Approval",
+              "owner": "AWS",
+              "provider": "Manual",
+              "version": "1"
+            },
+            "runOrder": 1,
+            "configuration": {},
+            "outputArtifacts": [],
+            "inputArtifacts": []
+          }
+        ]
+      },
+      {
+        "name": "Deploy",
+        "actions": [
+          {
+            "name": "Deploy",
+            "actionTypeId": {
+              "category": "Build",
+              "owner": "AWS",
+              "provider": "CodeBuild",
+              "version": "1"
+            },
+            "runOrder": 1,
+            "configuration": {
+              "ProjectName": "codebuild-01"
+            },
+            "outputArtifacts": [],
+            "inputArtifacts": [
+              {
+                "name": "BuildArtifact"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "version": 5
+  },
+  "metadata": {
+    "pipelineArn": "arn:aws:codepipeline:us-east-1:529276214230:pipeline-01",
+    "created": "2018-12-20T13:48:51.051Z",
+    "updated": "2018-12-20T15:40:40.259Z"
+  }
+}
